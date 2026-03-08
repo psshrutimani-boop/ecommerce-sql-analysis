@@ -1,0 +1,90 @@
+--E-Commerce Customer Data Analysis Project
+
+---Average order value
+select AVG(totalprice)AS
+AVERAGE_ORDER_VALUE
+FROM ecommerce_dataset;
+
+---Cities generating the most revenue
+select city,SUM(totalprice)AS
+CITY_SALES
+FROM ecommerce_dataset
+GROUP BY city
+ORDER BY CITY_SALES DESC
+LIMIT 5;
+
+---Maximum products purchased by each customers
+select customerid,productname
+FROM ecommerce_dataset
+WHERE productcategory=(SELECT MAX(productcategory)
+FROM ecommerce_dataset);
+ 
+---Maximum payment method preferred by customers
+select MAX(paymentmethod)AS HIGHEST_PAYMENT_PRIORITY
+FROM ecommerce_dataset;
+
+---maximum product like by all customers
+select MAX(productname)AS HIGHEST_PRODUCT
+FROM ecommerce_dataset;
+
+---price purchased by each customers
+select customerid,SUM(priceperunit*quantity)AS 
+total_spent
+from ecommerce_dataset
+GROUP by customerid;
+
+---total quantity in each product
+select productname,SUM(quantity)AS 
+total_quantity
+from ecommerce_dataset
+GROUP by productcategory;
+
+---total quantity purchaesd
+select SUM(quantity)AS 
+total_quantity
+from ecommerce_dataset
+GROUP by productcategory;
+
+---total sales in each city
+select city,SUM(priceperunit*quantity)AS 
+total_sales
+from ecommerce_dataset
+GROUP by city;
+
+---total sales
+select SUM(priceperunit*quantity)AS total_sales
+from ecommerce_dataset;
+ 
+
+basic queries:
+select *from ecommerce_dataset
+limit 10; 
+
+
+select *from ecommerce_dataset
+order by customerid ASC;
+
+select *from ecommerce_dataset
+where  Age BETWEEN 20 AND 30;
+
+---total products having quantity greater than 3
+select count(*)as total_Products
+from ecommerce_dataset
+where  Quantity>3;
+
+---total orders
+select count(*)as total_orders
+from ecommerce_dataset;
+ 
+ 
+
+ 
+
+
+
+
+
+
+
+
+                      
